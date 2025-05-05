@@ -12,6 +12,17 @@ class EmployersAddForm extends Component {
     }
 
     onGetValue = (e) => {
+
+        if(e.target.name == 'name') {
+            console.log('its name');
+            e.target.value = e.target.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
+        }
+
+        if(e.target.name == 'salary') {
+            console.log('its salary');
+            e.target.value = e.target.value.replace(/\D/, '');
+        }
+
         this.setState({
             [e.target.name]: e.target.value
         })

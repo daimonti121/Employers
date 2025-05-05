@@ -32,7 +32,11 @@ class App extends Component {
     onAddItem = (e, nameValue, salaryValue) => {
         e.preventDefault();
 
-        if (nameValue === '' && salaryValue === '') {
+        if (nameValue === '' || salaryValue === '') {
+            this.setState({
+                addNewPerson: true
+            })
+        } else if (nameValue.length <= 3 || salaryValue <= 3) {
             this.setState({
                 addNewPerson: true
             })
@@ -84,6 +88,9 @@ class App extends Component {
     render() {
         let employees = this.state.data.length;
         let increased = this.state.data.filter(item => item.increase).length;
+
+        const { addNewPerson } = this.state;
+
         return (
             <div className="app">
                 <AppInfo employees={employees} increased={increased} />
@@ -95,7 +102,7 @@ class App extends Component {
 
                 <EmployersList data={this.state.data}
                     onDelete={this.deletedItem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise} />
-                <EmployersAddForm onAdd={this.onAddItem} addNewPerson={this.state.addNewPerson}/>
+                <EmployersAddForm onAdd={this.onAddItem} addNewPerson={addNewPerson} />
             </div>
         );
     }
