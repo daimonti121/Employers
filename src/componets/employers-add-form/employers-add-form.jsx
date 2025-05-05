@@ -17,11 +17,19 @@ class EmployersAddForm extends Component {
         })
     }
 
+    // .wrongButton 
+
     render() {
 
-        const { onAdd } = this.props;
+        const { onAdd, addNewPerson } = this.props;
 
         const { name, salary } = this.state;
+
+        let classNameButton = 'form-control new-post-label';
+
+        if (addNewPerson) {
+            classNameButton += ' wrongButton'
+        }
 
         return (
             <div className="app-add-form">
@@ -29,17 +37,18 @@ class EmployersAddForm extends Component {
                 <form
                     className="add-form d-flex">
                     <input type="text"
-                        className="form-control new-post-label"
+                        className={classNameButton}
                         placeholder="Как его зовут?" onChange={this.onGetValue} name='name' value={name} />
                     <input type="number"
-                        className="form-control new-post-label"
+                        className={classNameButton}
                         placeholder="З/П в $?" onChange={this.onGetValue} name='salary' value={salary} />
 
-                    <button type="submit"
-                        className="btn btn-outline-light" 
-                        onClick={(e) => { onAdd(e, name, salary);
-                        this.setState({ name: '', salary: '' }); }}
-                        >Добавить</button>
+                    <button className="btn btn-outline-light" type="submit"
+                        onClick={(e) => {
+                            onAdd(e, name, salary);
+                            this.setState({ name: '', salary: '' });
+                        }}
+                    >Добавить</button>
                 </form>
             </div>
         )

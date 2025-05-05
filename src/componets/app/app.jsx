@@ -17,7 +17,7 @@ class App extends Component {
                 { name: 'Olga Y.', salary: 3000, increase: true, rise: false, id: 2 },
                 { name: 'Kate Y.', salary: 4000, increase: false, rise: false, id: 3 },
             ],
-            conter: 0
+            addNewPerson: false
         }
     }
 
@@ -32,15 +32,25 @@ class App extends Component {
     onAddItem = (e, nameValue, salaryValue) => {
         e.preventDefault();
 
-        this.setState(({ data }) => {
+        if (nameValue === '' && salaryValue === '') {
+            this.setState({
+                addNewPerson: true
+            })
+        } else {
+            this.setState(({ data }) => {
 
-            const newId = data.length > 0 ? Math.max(...data.map(user => user.id)) + 1 : 1;
-            const newUser = { name: nameValue, salary: salaryValue, increase: false, rise: false, id: newId };
+                const newId = data.length > 0 ? Math.max(...data.map(user => user.id)) + 1 : 1;
+                const newUser = { name: nameValue, salary: salaryValue, increase: false, rise: false, id: newId };
 
-            return {
-                data: [...data, newUser]
-            };
-        });
+                return {
+                    data: [...data, newUser]
+                };
+            });
+
+            this.setState({
+                addNewPerson: false
+            })
+        }
     }
 
     onToggleIncrease = (id) => {
@@ -76,7 +86,7 @@ class App extends Component {
         let increased = this.state.data.filter(item => item.increase).length;
         return (
             <div className="app">
-                <AppInfo employees={employees} increased={increased}/>
+                <AppInfo employees={employees} increased={increased} />
 
                 <div className="search-panel">
                     <SearchPanel />
@@ -84,8 +94,8 @@ class App extends Component {
                 </div>
 
                 <EmployersList data={this.state.data}
-                    onDelete={this.deletedItem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
-                <EmployersAddForm onAdd={this.onAddItem} />
+                    onDelete={this.deletedItem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise} />
+                <EmployersAddForm onAdd={this.onAddItem} addNewPerson={this.state.addNewPerson}/>
             </div>
         );
     }
