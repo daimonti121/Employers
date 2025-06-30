@@ -1,4 +1,4 @@
-👥 Employers — React Application for Employee Management
+👥 Employer — React Application for Employee Management
 
 🔧 Task:
 Develop a simple and user-friendly interface for adding, deleting, and managing employee data. The app was built with React using modern practices and a component-based architecture.
