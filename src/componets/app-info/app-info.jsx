@@ -4,9 +4,9 @@ const AppInfo = ({employees, increased}) => {
 
     return (
         <div className="app-info">
-            <h1>Учет сотрудников в компании N</h1>
-            <h2>Общее число сотрудников: {employees}</h2>
-            <h2>Премию получать: {increased}</h2>
+            <h1>Employee Tracking at Company N</h1>
+            <h2>Total Number of Employees: {employees}</h2>
+            <h2>Eligible for Bonus: {increased}</h2>
         </div>
     );
 

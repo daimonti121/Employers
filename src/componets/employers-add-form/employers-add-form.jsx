@@ -13,12 +13,12 @@ class EmployersAddForm extends Component {
 
     onGetValue = (e) => {
 
-        if(e.target.name == 'name') {
+        if(e.target.name === 'name') {
             console.log('its name');
             e.target.value = e.target.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
         }
 
-        if(e.target.name == 'salary') {
+        if(e.target.name === 'salary') {
             console.log('its salary');
             e.target.value = e.target.value.replace(/\D/, '');
         }
@@ -44,22 +44,22 @@ class EmployersAddForm extends Component {
 
         return (
             <div className="app-add-form">
-                <h3>Добавьте нового сотрудника</h3>
+                <h3>Add New Employee</h3>
                 <form
                     className="add-form d-flex">
                     <input type="text"
                         className={classNameButton}
-                        placeholder="Как его зовут?" onChange={this.onGetValue} name='name' value={name} />
+                        placeholder="Employee Name?" onChange={this.onGetValue} name='name' value={name} />
                     <input type="number"
                         className={classNameButton}
-                        placeholder="З/П в $?" onChange={this.onGetValue} name='salary' value={salary} />
+                        placeholder="Salary in $?" onChange={this.onGetValue} name='salary' value={salary} />
 
                     <button className="btn btn-outline-light" type="submit"
                         onClick={(e) => {
                             onAdd(e, name, salary);
                             this.setState({ name: '', salary: '' });
                         }}
-                    >Добавить</button>
+                    >Add</button>
                 </form>
             </div>
         )
